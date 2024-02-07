@@ -1,0 +1,11 @@
+{
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "tailwindCSS.classAttributes": ["className", "tw", "clerkAppearance.*"],
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "editor.quickSuggestions": {
+        "strings": true
+    }
+}
