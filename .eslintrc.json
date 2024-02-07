@@ -20,7 +20,6 @@
         "import/no-mutable-exports": "error",
 
         "import/no-cycle": "error",
-        "import/no-default-export": "error",
 
         // allow {} even though it's unsafe but comes handy
         "@typescript-eslint/ban-types": ["error"],
@@ -74,13 +73,5 @@
             }
         ]
     },
-    "overrides": [
-        {
-            "files": ["src/app/**/*.ts?(x)", "middleware.ts"],
-            "rules": {
-                "import/no-default-export": "off"
-            }
-        }
-    ],
     "ignorePatterns": ["*.js", "*.jsx"]
 }
