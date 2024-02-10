@@ -1,40 +1,14 @@
-import { Product, type ProductType } from "@/components/molecules/Product";
+import { type ProductType } from "@/@types/products";
+import { Product } from "@/components/molecules/Product";
 
-const products: ProductType[] = [
-    {
-        id: "1",
-        title: "Buty do biegania",
-        price: 899.99,
-        image: "/adidas-by-stella-mccartney-ultraboost-speed.avif",
-        color: "Różowy",
-    },
-    {
-        id: "2",
-        title: "Stylowe buty",
-        price: 169,
-        image: "/buty-terrex-soulstride-ultra-trail-running.avif",
-        color: "Pomarańczowy",
-    },
-    {
-        id: "3",
-        title: "Buty do kośćioła",
-        price: 599,
-        image: "/solarglide-6-shoes.avif",
-        color: "Czarny",
-    },
-    {
-        id: "4",
-        title: "Buty na spacer",
-        price: 400,
-        image: "/buty-terrex-soulstride-ultra-trail-running.avif",
-        color: "Czerwony",
-    },
-];
+interface ProductListProps {
+    products: ProductType[];
+}
 
-export const ProductList = () => {
+export const ProductList = ({ products }: ProductListProps) => {
     return (
         <ul
-            className="mt-6 grid grid-cols-1 gap-x-2 gap-y-4 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-6 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-4"
             data-testid="products-list"
         >
             {products.map((product) => (
