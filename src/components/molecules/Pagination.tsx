@@ -66,7 +66,6 @@ export const Pagination = ({ totalCount, pageSize, path }: PaginationProps) => {
                         {Array.from({ length: pages }, (_, i) => (
                             <ActiveLink
                                 key={i}
-                                isActive={currentPage === i + 1}
                                 href={createPageURL(i + 1)}
                                 activeClassName="bg-indigo-600 text-white -2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:bg-indigo-700"
                                 className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
