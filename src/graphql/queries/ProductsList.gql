@@ -1,0 +1,10 @@
+query ProductsList($take: Int, $skip: Int, $search: String) {
+    products(take: $take, skip: $skip, search: $search) {
+        data {
+            ...SingleProduct
+        }
+        meta {
+            total
+        }
+    }
+}

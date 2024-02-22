@@ -1,8 +1,8 @@
-import { type ProductType } from "@/@types/products";
 import { Product } from "@/components/molecules/Product";
+import { type SingleProductFragment } from "@/graphql/generated/graphql";
 
 interface ProductListProps {
-    products: ProductType[];
+    products: SingleProductFragment[];
 }
 
 export const ProductList = ({ products }: ProductListProps) => {

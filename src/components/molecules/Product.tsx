@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatPrice } from "@/utils/helpers";
-import { type ProductType } from "@/@types/products";
+import { type SingleProductFragment } from "@/graphql/generated/graphql";
 
-export const Product = ({ image, price, title, category, id }: ProductType) => {
+export const Product = ({ images, price, name, categories, id }: SingleProductFragment) => {
     return (
         <li className="group relative">
             <Link href={`/product/${id}`}>
                 <div className="w-full overflow-hidden border-2 border-gray-100 bg-white p-2 group-hover:opacity-75">
                     <div className="aspect-h-1 aspect-w-1">
                         <Image
-                            src={image}
-                            alt={title}
+                            src={images[0]?.url}
+                            alt={name}
                             className="h-full w-full object-contain object-center"
                             width={300}
                             height={300}
@@ -22,9 +22,9 @@ export const Product = ({ image, price, title, category, id }: ProductType) => {
                     <div>
                         <h3 className="text-sm text-gray-700">
                             <span aria-hidden="true" className="absolute inset-0" />
-                            {title}
+                            {name}
                         </h3>
-                        <p className="mt-1 text-sm text-gray-500">{category}</p>
+                        <p className="mt-1 text-sm text-gray-500">{categories[0]?.name}</p>
                     </div>
                     <p className="text-sm font-medium text-gray-900">{formatPrice(price)}</p>
                 </div>
