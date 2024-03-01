@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { type Metadata } from "next";
-import { type ProductType } from "@/@types/products";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { formatPrice } from "@/utils/helpers";
+import { getProductById } from "@/app/product/[productId]/getProductById";
+import { ReleatedProducts } from "@/components/organisms/ReleatedProducts/ReleatedProducts";
 
 interface ProductPageProps {
     params: {
@@ -14,20 +17,17 @@ export async function generateMetadata({
 }: {
     params: { productId: string };
 }): Promise<Metadata> {
-    const product = (await fetch(
-        `https://naszsklep-api.vercel.app/api/products/${params.productId}`,
-    ).then((res) => res.json())) as ProductType;
+    const { product } = await getProductById(params.productId);
 
     return {
-        title: product.title,
-        description: product.description,
+        title: product?.name || "",
+        description: product?.description || "",
     };
 }
 
 export default async function ProductPage({ params: { productId } }: ProductPageProps) {
-    const product = (await fetch(`https://naszsklep-api.vercel.app/api/products/${productId}`).then(
-        (res) => res.json(),
-    )) as ProductType;
+    const { product } = await getProductById(productId);
+    if (!product) return notFound();
 
     return (
         <main className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -36,8 +36,8 @@ export default async function ProductPage({ params: { productId } }: ProductPage
                     <div className="mx-auto mt-6 max-w-2xl sm:px-6">
                         <div className="aspect-1 overflow-hidden rounded-lg border-2 border-gray-100 p-2">
                             <Image
-                                src={product.image}
-                                alt={product.title}
+                                src={product.images?.[0]?.url}
+                                alt={product.name}
                                 className="h-full w-full object-contain object-center"
                                 width={600}
                                 height={600}
@@ -49,7 +49,7 @@ export default async function ProductPage({ params: { productId } }: ProductPage
                     <div className="mx-auto px-4 pb-16 pt-10 sm:px-6 lg:w-[480px] lg:px-8 lg:pb-24 lg:pt-16 xl:w-[600px]">
                         <div className="flex justify-between gap-x-6">
                             <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                                {product.title}
+                                {product.name}
                             </h1>
                             <p className="text-lg tracking-tight text-gray-900">
                                 {formatPrice(product.price)}
@@ -65,7 +65,7 @@ export default async function ProductPage({ params: { productId } }: ProductPage
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-900">Category</h3>
                                     <p className="text-lg font-medium text-black">
-                                        {product.category}
+                                        {product.categories[0]?.name}
                                     </p>
                                 </div>
 
@@ -88,6 +88,12 @@ export default async function ProductPage({ params: { productId } }: ProductPage
                     </div>
                 </div>
             </div>
+
+            <Suspense>
+                <div className="mt-24">
+                    <ReleatedProducts />
+                </div>
+            </Suspense>
         </main>
     );
 }

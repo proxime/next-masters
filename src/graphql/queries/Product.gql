@@ -1,0 +1,13 @@
+query ProductById($id: ID!) {
+    product(id: $id) {
+        ...SingleProduct
+    }
+}
+
+query RelatedProducts {
+    products(take: 4) {
+        data {
+            ...SingleProduct
+        }
+    }
+}

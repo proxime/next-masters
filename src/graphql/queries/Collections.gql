@@ -1,0 +1,22 @@
+query CollectionsList($take: Int, $skip: Int) {
+    collections(take: $take, skip: $skip) {
+        data {
+            id
+            name
+            description
+            slug
+        }
+        meta {
+            total
+        }
+    }
+}
+
+query CollectionProducts($slug: String) {
+    collection(slug: $slug) {
+        id
+        products {
+            ...SingleProduct
+        }
+    }
+}
