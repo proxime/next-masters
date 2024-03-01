@@ -14,17 +14,22 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "fragment SingleProduct on Product {\n  id\n  categories {\n    id\n    name\n  }\n  description\n  images {\n    alt\n    height\n    id\n    url\n    width\n  }\n  name\n  price\n  rating\n}": types.SingleProductFragmentDoc,
+    "fragment SingleProduct on Product {\n  id\n  categories {\n    id\n    name\n  }\n  description\n  images {\n    alt\n    height\n    id\n    url\n    width\n  }\n  name\n  price\n  rating\n}\n\nfragment ProductReview on Review {\n  author\n  createdAt\n  description\n  email\n  id\n  rating\n  title\n}": types.SingleProductFragmentDoc,
+    "mutation CreateReview($author: String!, $description: String!, $email: String!, $productId: ID!, $rating: Int!, $title: String!) {\n  reviewCreate(\n    author: $author\n    description: $description\n    email: $email\n    productId: $productId\n    rating: $rating\n    title: $title\n  ) {\n    id\n  }\n}": types.CreateReviewDocument,
     "query CategoriesList($take: Int, $skip: Int) {\n  categories(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      slug\n    }\n    meta {\n      total\n    }\n  }\n}\n\nquery CategoryProducts($slug: String) {\n  category(slug: $slug) {\n    id\n    products {\n      ...SingleProduct\n    }\n  }\n}": types.CategoriesListDocument,
     "query CollectionsList($take: Int, $skip: Int) {\n  collections(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      slug\n    }\n    meta {\n      total\n    }\n  }\n}\n\nquery CollectionProducts($slug: String) {\n  collection(slug: $slug) {\n    id\n    products {\n      ...SingleProduct\n    }\n  }\n}": types.CollectionsListDocument,
-    "query ProductById($id: ID!) {\n  product(id: $id) {\n    ...SingleProduct\n  }\n}\n\nquery RelatedProducts {\n  products(take: 4) {\n    data {\n      ...SingleProduct\n    }\n  }\n}": types.ProductByIdDocument,
+    "query ProductById($id: ID!) {\n  product(id: $id) {\n    ...SingleProduct\n  }\n}\n\nquery RelatedProducts {\n  products(take: 4) {\n    data {\n      ...SingleProduct\n    }\n  }\n}\n\nquery ProductReviews($id: ID!) {\n  product(id: $id) {\n    id\n    reviews {\n      ...ProductReview\n    }\n  }\n}": types.ProductByIdDocument,
     "query ProductsList($take: Int, $skip: Int, $search: String) {\n  products(take: $take, skip: $skip, search: $search) {\n    data {\n      ...SingleProduct\n    }\n    meta {\n      total\n    }\n  }\n}": types.ProductsListDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "fragment SingleProduct on Product {\n  id\n  categories {\n    id\n    name\n  }\n  description\n  images {\n    alt\n    height\n    id\n    url\n    width\n  }\n  name\n  price\n  rating\n}"): typeof import('./graphql').SingleProductFragmentDoc;
+export function graphql(source: "fragment SingleProduct on Product {\n  id\n  categories {\n    id\n    name\n  }\n  description\n  images {\n    alt\n    height\n    id\n    url\n    width\n  }\n  name\n  price\n  rating\n}\n\nfragment ProductReview on Review {\n  author\n  createdAt\n  description\n  email\n  id\n  rating\n  title\n}"): typeof import('./graphql').SingleProductFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation CreateReview($author: String!, $description: String!, $email: String!, $productId: ID!, $rating: Int!, $title: String!) {\n  reviewCreate(\n    author: $author\n    description: $description\n    email: $email\n    productId: $productId\n    rating: $rating\n    title: $title\n  ) {\n    id\n  }\n}"): typeof import('./graphql').CreateReviewDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -36,7 +41,7 @@ export function graphql(source: "query CollectionsList($take: Int, $skip: Int) {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductById($id: ID!) {\n  product(id: $id) {\n    ...SingleProduct\n  }\n}\n\nquery RelatedProducts {\n  products(take: 4) {\n    data {\n      ...SingleProduct\n    }\n  }\n}"): typeof import('./graphql').ProductByIdDocument;
+export function graphql(source: "query ProductById($id: ID!) {\n  product(id: $id) {\n    ...SingleProduct\n  }\n}\n\nquery RelatedProducts {\n  products(take: 4) {\n    data {\n      ...SingleProduct\n    }\n  }\n}\n\nquery ProductReviews($id: ID!) {\n  product(id: $id) {\n    id\n    reviews {\n      ...ProductReview\n    }\n  }\n}"): typeof import('./graphql').ProductByIdDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -16,6 +16,7 @@ export const getProducts = async (page: number, search?: string) => {
 
         return { products: data.products };
     } catch (error) {
+        console.error("Error fetching products", error);
         return { products: null, error };
     }
 };

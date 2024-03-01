@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { formatPrice } from "@/utils/helpers";
 import { getProductById } from "@/app/product/[productId]/getProductById";
 import { ReleatedProducts } from "@/components/organisms/ReleatedProducts/ReleatedProducts";
+import { Reviews } from "@/components/organisms/Reviews/Reviews";
 
 interface ProductPageProps {
     params: {
@@ -92,6 +93,12 @@ export default async function ProductPage({ params: { productId } }: ProductPage
             <Suspense>
                 <div className="mt-24">
                     <ReleatedProducts />
+                </div>
+            </Suspense>
+
+            <Suspense>
+                <div className="mt-24">
+                    <Reviews productId={productId} />
                 </div>
             </Suspense>
         </main>
