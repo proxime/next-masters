@@ -1,0 +1,31 @@
+mutation CartAddItem($id: ID!, $input: MutationCartAddItemInput!) {
+    cartAddItem(id: $id, input: $input) {
+        id
+        items {
+            quantity
+            product {
+                id
+                name
+                price
+            }
+        }
+    }
+}
+
+mutation CartChangeItemQuantity($id: ID!, $productId: ID!, $quantity: Int!) {
+    cartChangeItemQuantity(id: $id, productId: $productId, quantity: $quantity) {
+        id
+    }
+}
+
+mutation CartFindOrCreate {
+    newCart: cartFindOrCreate(input: { items: [{ productId: "1", quantity: 0 }] }) {
+        id
+    }
+}
+
+mutation CartRemoveItem($id: ID!, $productId: ID!) {
+    cartRemoveItem(id: $id, productId: $productId) {
+        id
+    }
+}

@@ -24,7 +24,7 @@ export const Search = () => {
         <div className={"relative w-full"}>
             <input
                 className="w-full rounded-md border border-gray-300 bg-gray-100 py-3 pl-4 pr-12 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-800"
-                placeholder="Search for products, categories or brands..."
+                placeholder="Search for products"
                 onChange={handleChange}
                 type="text"
                 role="searchbox"

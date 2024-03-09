@@ -2,14 +2,16 @@ import { Suspense } from "react";
 import { ActiveLink } from "@/components/atoms/ActiveLink";
 import { NavbarMobile } from "@/components/molecules/Navbar/Navbar.mobile";
 import { Search } from "@/components/molecules/Search";
+import { CartLink } from "@/components/atoms/CartLink";
 
 export const Navbar = () => {
     return (
         <header className="bg-white">
             <nav
-                className="mx-auto flex max-w-3xl items-center justify-end p-6 lg:max-w-7xl lg:justify-center lg:px-8"
+                className="mx-auto flex max-w-3xl items-center justify-end p-6 lg:max-w-7xl lg:justify-between lg:px-8"
                 aria-label="Global"
             >
+                <div></div>
                 <div className="align-center hidden items-center lg:flex lg:gap-x-12">
                     <ActiveLink
                         href={"/"}
@@ -45,6 +47,9 @@ export const Navbar = () => {
                             <Search />
                         </Suspense>
                     </div>
+                </div>
+                <div>
+                    <CartLink />
                 </div>
                 <NavbarMobile />
             </nav>

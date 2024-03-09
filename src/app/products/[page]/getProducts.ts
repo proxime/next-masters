@@ -1,9 +1,20 @@
 import { executeGraphQL } from "@/utils/executeGraphQL";
-import { ProductsListDocument } from "@/graphql/generated/graphql";
+import {
+    type ProductSortBy,
+    ProductsListDocument,
+    type SortDirection,
+} from "@/graphql/generated/graphql";
 
 export const PRODCUTS_PAGE_SIZE = 8;
 
-export const getProducts = async (page: number, search?: string) => {
+export const getProducts = async (
+    page: number,
+    search?: string,
+    filters?: {
+        orderBy: ProductSortBy;
+        order: SortDirection;
+    },
+) => {
     try {
         const data = await executeGraphQL({
             query: ProductsListDocument,
@@ -11,6 +22,8 @@ export const getProducts = async (page: number, search?: string) => {
                 skip: (page - 1) * PRODCUTS_PAGE_SIZE,
                 take: PRODCUTS_PAGE_SIZE,
                 search,
+                orderBy: filters?.orderBy,
+                order: filters?.order,
             },
         });
 

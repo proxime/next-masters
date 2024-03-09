@@ -28,7 +28,16 @@ export const ReviewForm = ({ productId }: ReviewFormProps) => {
     const handleFormSubmit = handleSubmit(async (formData) => {
         try {
             setLoading(true);
-            await addReviewAction(formData, productId);
+            await addReviewAction(
+                {
+                    description: formData.content,
+                    email: formData.email,
+                    title: formData.headline,
+                    author: formData.name,
+                    rating: ratingField.value,
+                },
+                productId,
+            );
             reset();
         } catch (err) {
             console.error(err);
@@ -47,7 +56,7 @@ export const ReviewForm = ({ productId }: ReviewFormProps) => {
                     Headline
                 </label>
                 <input
-                    {...register("title")}
+                    {...register("headline")}
                     id="headline"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                     placeholder="Enter headline"
@@ -61,7 +70,7 @@ export const ReviewForm = ({ productId }: ReviewFormProps) => {
                     Content
                 </label>
                 <textarea
-                    {...register("description")}
+                    {...register("content")}
                     id="content"
                     className="block w-full resize-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                     placeholder="Enter content"
@@ -82,7 +91,7 @@ export const ReviewForm = ({ productId }: ReviewFormProps) => {
                     Your Name
                 </label>
                 <input
-                    {...register("author")}
+                    {...register("name")}
                     id="name"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                     placeholder="Enter your Name"
@@ -116,10 +125,10 @@ export const ReviewForm = ({ productId }: ReviewFormProps) => {
 };
 
 const ReviewFormSchema = yup.object({
-    title: yup.string().required("Enter headline"),
-    description: yup.string().required("Enter content"),
+    headline: yup.string().required("Enter headline"),
+    content: yup.string().required("Enter content"),
     rating: yup.number().required("Enter rating"),
-    author: yup.string().required("Enter your name"),
+    name: yup.string().required("Enter your name"),
     email: yup.string().email("Email is invalid").required("Enter your email"),
 });
 

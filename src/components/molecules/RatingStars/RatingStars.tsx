@@ -18,6 +18,7 @@ export const RatingStars = ({ count = 5, onChange, value, readOnly }: RatingStar
 
     return (
         <div className="flex items-center">
+            <input name="rating" readOnly value={rate} />
             {Array(count)
                 .fill(0)
                 .map((_, index) => (
