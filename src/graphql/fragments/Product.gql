@@ -16,3 +16,13 @@ fragment SingleProduct on Product {
     price
     rating
 }
+
+fragment ProductReview on Review {
+    author
+    createdAt
+    description
+    email
+    id
+    rating
+    title
+}

@@ -11,3 +11,12 @@ query RelatedProducts {
         }
     }
 }
+
+query ProductReviews($id: ID!) {
+    product(id: $id) {
+        id
+        reviews {
+            ...ProductReview
+        }
+    }
+}

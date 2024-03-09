@@ -3,7 +3,6 @@ import { type TypedDocumentString } from "@/graphql/generated/graphql";
 type GraphQLResponse<T> =
     | { data?: undefined; errors: { message: string }[] }
     | { data: T; errors?: undefined };
-
 export async function executeGraphQL<TResult, TVariables>({
     query,
     variables,
